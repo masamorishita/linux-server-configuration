@@ -18,7 +18,7 @@ http://3.112.16.53.xip.io
 ```
 
 ## iii. A summary of software installed and configuration changes made.
-### 1. A summary of software installed:
+### 1. Software installed
 To run the apache server with WSGI module, the following softwares are installed:
 ```
 apache2
@@ -44,5 +44,25 @@ python-virtualenv # to build a virtual environment
 
 ```
 
+### 2. Configuration changes made
 
-## iv. A list of any third-party resources you made use of to complete this project.
+#### 2.1. Get the server
+
+
+#### 2.2. Secure the server
+
+
+#### 2.3. Give new user access
+
+
+#### 2.4. Prepare to deploy the application
+
+
+#### 2.5. Deploy the Item Catalog application
+
+
+## iv. A list of third-party resources
+[Flask Documentation](http://flask.pocoo.org/docs/0.12/)
+[Apache HTTP Server Version 2.4 Documentation](https://httpd.apache.org/docs/2.4/)
+[PostgreSQL 9.3.25 Documentation](https://www.postgresql.org/docs/9.3/index.html)
+[How To Deploy a Flask Application on an Ubuntu VPS - DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)

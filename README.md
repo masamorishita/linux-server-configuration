@@ -40,10 +40,10 @@ python-psycopg2
 ```
 Other than the above softwares, the following softwares are also installed:
 ```
-git # to use git in the system
-PostgreSQL # to use PostgreSQL
-python-pip # to enable pip install
-python-virtualenv # to build a virtual environment
+git    # to use git in the system
+PostgreSQL    # to use PostgreSQL
+python-pip    # to enable pip install
+python-virtualenv    # to build a virtual environment
 
 ```
 
@@ -51,9 +51,28 @@ python-virtualenv # to build a virtual environment
 ### 2. Configuration changes made
 
 #### 2.1. Get the server
-
+Amazon Lightsail is used to prepare Linux Ubuntu server to host the application.
 
 #### 2.2. Secure the server
+To update all currently installed packages, the following commands are excecuted:
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+In order to change the port for ssh, edit `/etc/ssh/sshd_config` and change the default ssh port from `22` to `2200`
+To set the firewall, the following commands are executed:
+```
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+sudo ufw allow 2200/tcp
+sudo ufw allow http
+sudo ufw allow udp
+sudo ufw deny 22
+sudo ufw enable
+```
+
+You may also need to set the relevant port on "Networking" tab on AWS Lightsail console page. 
 
 
 #### 2.3. Give new user access

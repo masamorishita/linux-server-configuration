@@ -177,7 +177,19 @@ Secondly, modify the path for `client_secrets.json` file on `__init__.py` as fol
 ```
 
 ##### 2.5.3. Prepare Flask and prepare its virtual environment
-
+To install and prepare the environment, run the following commands:
+```
+$ sudo apt-get install python-pip
+$ sudo pip install virtualenv
+$ sudo virtualenv venv
+$ source venv/bin/activate
+$ sudo pip install Flask
+$ pip install bleach httplib2 request oauth2client sqlalchemy python-psycopg2    # to install all other neccesary softwares
+```
+Now that you should be able to run the application by executin the following command:
+```
+sudo python __init__.py
+```
 
 ##### 2.5.4. Configure apache
 

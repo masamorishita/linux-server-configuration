@@ -159,7 +159,7 @@ Rename `application.py` to `__init__.py` by following command:
 $ mv application.py __init__.py
 ```
 
-##### 2.5.2. Modify some code on Item Catalog Application
+##### 2.5.2. Modify some code on Item Catalog application
 Firstly, modify the database connection on `__init__.py` `database_setup.py` `addcategories.py` `lotsofitems.py` as following:
 ```
 - engine = create_engine('sqlite:///itemwithusers.db')
@@ -188,13 +188,47 @@ $ pip install bleach httplib2 request oauth2client sqlalchemy python-psycopg2   
 ```
 Now that you should be able to run the application by executin the following command:
 ```
-sudo python __init__.py
+$ sudo python __init__.py
 ```
 
 ##### 2.5.4. Configure apache
+Create the configuration file for apache by executing following command:
+```
+sudo nano /etc/apache2/sites-available/catalog.conf
+```
+The file should include the following code:
+```
+<VirtualHost *:80>
+    ServerName 3.112.16.53
+    ServerAdmin admin@3.112.16.53
+    WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages
+    WSGIProcessGroup catalog
+    WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+    <Directory /var/www/catalog/catalog/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static /var/www/catalog/catalog/static
+    <Directory /var/www/catalog/catalog/static/>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    LogLevel warn
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+To enable the virtual host, run the following command:
+```
+$ sudo a2ensite catalog
+```
 
+Finally, restart the server with the command:
+```
+$ sudo service apache2 restart
+```
 
-
+Now that you should be able to access Item Catalog application on [http://3.112.16.53](http://3.112.16.53).
 
 ## iv. A list of third-party resources
 - [Flask Documentation](http://flask.pocoo.org/docs/0.12/)

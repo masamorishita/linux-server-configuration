@@ -60,7 +60,8 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
-In order to change the port for ssh, edit `/etc/ssh/sshd_config` and change the default ssh port from `22` to `2200`
+In order to change the port for ssh, edit `/etc/ssh/sshd_config` and change the default ssh port from `22` to `2200`.
+
 To set the firewall, the following commands are executed:
 ```
 sudo ufw default deny incoming
@@ -76,6 +77,37 @@ You may also need to set the relevant port on "Networking" tab on AWS Lightsail 
 
 
 #### 2.3. Give new user access
+In order to add a new user `grader`, run the following command:
+```
+sudo adduser grader
+```
+
+
+To give `grader` the permission to `sudo`, run the following command to edit the file:
+```
+sudo nano /etc/sudoers.d/grader
+```
+Then add the following line:
+```
+grader ALL=(ALL)
+```
+
+
+In order to set the SSH key pair for `grader`, firstly run `ssh-keygen` on your local machine.
+
+Then copy the generated public key for pasting the server side later.
+
+To set the key on your server, run the following command to edit the file:
+```
+su - grader
+mkdir .ssh
+touch .ssh/authorized_keys
+nano .ssh/authorized_keys
+```
+Then paste the public key you copied previously.
+
+
+Reload by running `service ssh restart` and you should be able to login with the private key you generated locally.
 
 
 #### 2.4. Prepare to deploy the application

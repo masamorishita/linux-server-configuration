@@ -56,21 +56,21 @@ Amazon Lightsail is used to prepare Linux Ubuntu server to host the application.
 #### 2.2. Secure the server
 To update all currently installed packages, the following commands are excecuted:
 ```
-sudo apt-get update
-sudo apt-get upgrade
+$ sudo apt-get update
+$ sudo apt-get upgrade
 ```
 
 In order to change the port for ssh, edit `/etc/ssh/sshd_config` and change the default ssh port from `22` to `2200`.
 
 To set the firewall, the following commands are executed:
 ```
-sudo ufw default deny incoming
-sudo ufw default deny outgoing
-sudo ufw allow 2200/tcp
-sudo ufw allow http
-sudo ufw allow udp
-sudo ufw deny 22
-sudo ufw enable
+$ sudo ufw default deny incoming
+$ sudo ufw default deny outgoing
+$ sudo ufw allow 2200/tcp
+$ sudo ufw allow http
+$ sudo ufw allow udp
+$ sudo ufw deny 22
+$ sudo ufw enable
 ```
 
 You may also need to set the relevant port on "Networking" tab on AWS Lightsail console page. 
@@ -79,13 +79,13 @@ You may also need to set the relevant port on "Networking" tab on AWS Lightsail 
 #### 2.3. Give new user access
 In order to add a new user `grader`, run the following command:
 ```
-sudo adduser grader
+$ sudo adduser grader
 ```
 
 
 To give `grader` the permission to `sudo`, run the following command to edit the file:
 ```
-sudo nano /etc/sudoers.d/grader
+$ sudo nano /etc/sudoers.d/grader
 ```
 Then add the following line:
 ```
@@ -99,10 +99,10 @@ Then copy the generated public key for pasting the server side later.
 
 To set the key on your server, run the following command to edit the file:
 ```
-su - grader
-mkdir .ssh
-touch .ssh/authorized_keys
-nano .ssh/authorized_keys
+$ su - grader
+$ mkdir .ssh
+$ touch .ssh/authorized_keys
+$ nano .ssh/authorized_keys
 ```
 Then paste the public key you copied previously.
 
@@ -111,6 +111,26 @@ Reload by running `service ssh restart` and you should be able to login with the
 
 
 #### 2.4. Prepare to deploy the application
+To setup and run the apache server, run the following commands:
+```
+$ sudo apt-get install apache2
+$ sudo apt-get install libapache2-mod-wsgi
+$ sudo apache2ctl restart
+```
+
+To prepare a PostgreSQL database with the user named `catalog`, run the following commands:
+```
+$ sudo apt-get install PostgreSQL
+$ sudo su - postgres
+$ psql
+# CREATE USER catalog WITH PASSWORD 'password';
+# ALTER USER catalog CREATEDB;
+# CREATE DATABASE catalog WITH OWNER catalog;
+# \c catalog
+# REVOKE ALL ON SCHEMA public FROM public;
+# GRANT ALL ON SCHEMA public TO catalog;
+```
+Now that the database should be ready to use with `catalog` user.
 
 
 #### 2.5. Deploy the Item Catalog application

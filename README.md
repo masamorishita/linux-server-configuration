@@ -13,7 +13,7 @@ SSH port is set to `2200` for security reason.
 
 ## ii. The complete URL to the hosted web application.
 
-The application is currently avaialble in the following URL:
+The application is currently avaialble on the following URL:
 ```
 http://3.112.16.53.xip.io
 ```
@@ -160,7 +160,21 @@ $ mv application.py __init__.py
 ```
 
 ##### 2.5.2. Modify some code on Item Catalog Application
+Firstly, modify the database connection on `__init__.py` `database_setup.py` `addcategories.py` `lotsofitems.py` as following:
+```
+- engine = create_engine('sqlite:///itemwithusers.db')
++ engine = create_engine('postgresql://catalog:password@localhost/catalog')
+```
 
+Secondly, modify the path for `client_secrets.json` file on `__init__.py` as following
+```
+- CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
++ CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
+```
+```
+- oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
++ oauth_flow = flow_from_clientsecrets('/var/www/catalog/catalog/client_secrets.json', scope='')
+```
 
 ##### 2.5.3. Prepare Flask and prepare its virtual environment
 

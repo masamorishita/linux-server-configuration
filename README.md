@@ -133,7 +133,41 @@ $ psql
 Now that the database should be ready to use with `catalog` user.
 
 
-#### 2.5. Deploy the Item Catalog application
+#### 2.5. Deploy Item Catalog application
+##### 2.5.1. Clone Item Catalog repository
+Fistly you need to clone Item Catalog repository in the relevant directory as following:
+```
+$ cd /var/www
+$ sudo mkdir catalog
+$ cd catalog
+$ git clone https://github.com/masamorishita/item-catalog.git catalog
+```
+
+Then you add `catalog.wsgi` file on the directory `/var/www/catalog` including the following code:
+```
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0,"/var/www/catalog/")
+
+from catalog import app as application
+application.secret_key = 'Add your secret key'
+```
+
+Rename `application.py` to `__init__.py` by following command:
+```
+$ mv application.py __init__.py
+```
+
+##### 2.5.2. Modify some code on Item Catalog Application
+
+
+##### 2.5.3. Prepare Flask and prepare its virtual environment
+
+
+##### 2.5.4. Configure apache
+
+
 
 
 ## iv. A list of third-party resources

@@ -7,6 +7,7 @@ IP address is as following:
 ```
 3.112.16.53
 ```
+*This IP address is currently unavailable.
 
 SSH port is set to `2200` for security reason.
 
@@ -17,6 +18,7 @@ The application is currently avaialble on the following URL:
 ```
 http://3.112.16.53.xip.io
 ```
+*This URL is currently unavailable.
 
 
 ## iii. A summary of software installed and configuration changes made.
